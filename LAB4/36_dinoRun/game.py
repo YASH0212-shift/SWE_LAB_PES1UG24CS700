@@ -8,7 +8,10 @@ BG_COLOR = (245, 245, 245)
 GROUND_COLOR = (80, 80, 80)
 GRAVITY, JUMP_FORCE = 0.6, -14
 HIGH_SCORE_FILE = "dino_highscore.txt"
-
+POPUP_TEXT = ""
+POPUP_TIMER = 0
+POPUP_X = 0
+POPUP_Y = 0
 
 def dino_tint(on_ground):
    
@@ -18,8 +21,12 @@ def dino_tint(on_ground):
 
 
 def on_obstacle_passed(obstacle, score):
-    """Called once, the frame an obstacle finishes scrolling past the dino. Add a sound or a combo counter here."""
-    pass
+    global POPUP_TEXT, POPUP_TIMER, POPUP_X, POPUP_Y
+
+    POPUP_TEXT = "+1"
+    POPUP_TIMER = 45
+    POPUP_X = obstacle.rect.centerx
+    POPUP_Y = obstacle.rect.top - 25
 
 
 def max_jumps():
@@ -121,6 +128,9 @@ class Game:
         self.dino.jump()
 
     def update(self):
+        global POPUP_TIMER
+        if POPUP_TIMER > 0:
+            POPUP_TIMER -= 1
         if self.state != "play":
             return
         self.dino.update(GROUND_Y)
@@ -158,6 +168,9 @@ class Game:
         self.dino.draw(screen)
         for obs in self.obstacles:
             obs.draw(screen)
+        if POPUP_TIMER > 0:
+            popup = self.font.render(POPUP_TEXT, True, (40, 160, 40))
+            screen.blit(popup, (POPUP_X, POPUP_Y - (45 - POPUP_TIMER)))
 
         score_surf = self.font.render(f"Score: {self.score // 10}   Best: {self.high_score}", True, (50, 50, 50))
         screen.blit(score_surf, (WIDTH - 260, 20))
