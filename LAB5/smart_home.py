@@ -6,11 +6,12 @@ to a JSON file.
 """
 import json
 import os
-import subprocess  # nosec B404 - only used with a fixed argument list, no shell
+# subprocess is only used with a fixed argument list and no shell.
+import subprocess  # nosec B404
 
 HUB_HOST = os.environ.get("SMART_HUB_HOST", "127.0.0.1")
 HUB_PORT = 8080
-POWER_USAGE = {"light" : 10, "fan": 60, "thermostat": 1500, "tv": 120}
+POWER_USAGE = {"light": 10, "fan": 60, "thermostat": 1500, "tv": 120}
 HUB_PASSWORD = os.environ.get("SMART_HUB_PASSWORD", "")
 MIN_TEMPERATURE = 16
 MAX_TEMPERATURE = 30
@@ -58,6 +59,7 @@ def power_usage():
     active = [info for info in devices.values() if info["on"]]
     return sum(POWER_USAGE.get(info["kind"], 0) for info in active)
 
+
 def save_state(file_name="home_state.json"):
     """Write the current device state to a JSON file."""
     with open(file_name, "w", encoding="utf-8") as f:
@@ -75,8 +77,8 @@ def run_scene(scene_script):
     script_path = os.path.realpath(os.path.join(scenes_dir, scene_script))
     if os.path.dirname(script_path) != scenes_dir:
         raise ValueError("Scene script must be inside the scenes folder")
-    subprocess.run(["/bin/bash", script_path],  # nosec B603 - no shell, path validated
-                   check=True)
+    # No shell is used and the script path has been validated above.
+    subprocess.run(["/bin/bash", script_path], check=True)  # nosec B603
 
 
 def main():
@@ -92,9 +94,10 @@ def main():
     set_temperature("Ceiling Light", 20)
     print("Bedroom devices:", devices_in_room("Bedroom"))
     print("Current power use (W):", power_usage())
-    print("Hub address:", hub_address()) # for app setup
+    print("Hub address:", hub_address())  # for app setup
     print("Light settings:", devices["Ceiling Light"]["settings"])
-    print("Devices on:", [name for name, info in devices.items() if info["on"]])
+    devices_on = [name for name, info in devices.items() if info["on"]]
+    print("Devices on:", devices_on)
     save_state()
 
 
