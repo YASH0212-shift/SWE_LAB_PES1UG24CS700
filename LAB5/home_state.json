@@ -3,17 +3,13 @@
     "kind": "light",
     "room": "Living Room",
     "on": true,
-    "settings": {
-      "temperature": 30
-    }
+    "settings": {}
   },
   "Bedroom Fan": {
     "kind": "fan",
     "room": "Bedroom",
     "on": false,
-    "settings": {
-      "temperature": 30
-    }
+    "settings": {}
   },
   "Thermostat": {
     "kind": "thermostat",
@@ -27,8 +23,6 @@
     "kind": "tv",
     "room": "Living Room",
     "on": false,
-    "settings": {
-      "temperature": 30
-    }
+    "settings": {}
   }
 }
