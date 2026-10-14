@@ -1,0 +1,34 @@
+{
+  "Ceiling Light": {
+    "kind": "light",
+    "room": "Living Room",
+    "on": true,
+    "settings": {
+      "temperature": 30
+    }
+  },
+  "Bedroom Fan": {
+    "kind": "fan",
+    "room": "Bedroom",
+    "on": false,
+    "settings": {
+      "temperature": 30
+    }
+  },
+  "Thermostat": {
+    "kind": "thermostat",
+    "room": "Bedroom",
+    "on": true,
+    "settings": {
+      "temperature": 30
+    }
+  },
+  "Smart TV": {
+    "kind": "tv",
+    "room": "Living Room",
+    "on": false,
+    "settings": {
+      "temperature": 30
+    }
+  }
+}
