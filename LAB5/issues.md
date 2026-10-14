@@ -8,7 +8,7 @@ Line numbers refer to the original `smart_home.py`. Reports are in `reports_befo
 
 | Tool | Before | After |
 |------|--------|-------|
-| Pylint | 4.80/10 (25 messages) | 10.00/10 (0 messages) |
+| Pylint | 4.80/10 (25 messages) | 9.84/10 (1 messages) |
 | Bandit | 4 issues (1 High, 1 Medium, 2 Low) | 0 issues |
 | Flake8 | 4 violations | 0 violations |
 
